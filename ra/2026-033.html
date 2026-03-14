@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-033 – Mental Health | Narrow Aisle Ltd Risk Assessment</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 12px; }
+.page-header { background: linear-gradient(135deg, #7a0000 0%, #b30000 50%, #cc0000 100%); color: white; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.page-header .logo-text { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+.page-header .doc-num { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.title-bar { background: #1a1a2e; color: #fff; padding: 12px 24px; font-size: 15px; font-weight: 600; letter-spacing: 0.5px; display: flex; align-items: center; gap: 16px; }
+.title-bar .task-photos { display: flex; gap: 8px; align-items: center; }
+.title-bar .task-photos img { height: 70px; width: auto; border-radius: 6px; border: 2px solid rgba(255,255,255,0.2); object-fit: cover; cursor: zoom-in; transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
+.title-bar .task-photos img:hover { transform: scale(1.06); border-color: rgba(255,255,255,0.6); box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
+.meta-bar { background: #fff; border-bottom: 2px solid #b30000; padding: 10px 24px; display: flex; gap: 32px; font-size: 11px; flex-wrap: wrap; }
+.meta-bar .meta-item { display: flex; flex-direction: column; gap: 2px; }
+.meta-bar .meta-label { color: #7a0000; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; }
+.meta-bar .meta-value { color: #1a1a2e; font-weight: 500; }
+.container { padding: 16px 24px 28px; }
+.risk-key { background: white; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; border: 1px solid #e0e0e0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.risk-key h4 { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; }
+.risk-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.risk-low  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.risk-med  { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.risk-high { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+.ra-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e0e0e0; background: white; }
+table.ra-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+table.ra-table th { background: #7a0000; color: white; padding: 8px 6px; text-align: center; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; border: 1px solid #5c0000; }
+table.ra-table th.left { text-align: left; padding-left: 10px; }
+table.ra-table td { padding: 8px 6px; border: 1px solid #e8e8e8; vertical-align: top; }
+table.ra-table tr:nth-child(even) td { background: #fafafa; }
+table.ra-table tr:hover td { background: #fff3f3; }
+.hazard-cell { font-weight: 600; color: #1a1a2e; min-width: 130px; }
+.effect-cell { color: #555; min-width: 100px; }
+.controls-cell { min-width: 200px; }
+.controls-cell ul { padding-left: 14px; }
+.controls-cell li { margin-bottom: 3px; line-height: 1.4; }
+.num-cell { text-align: center; font-weight: 700; font-size: 13px; min-width: 36px; }
+.score-pre { color: #888; }
+.score-after { color: #2e7d32; }
+.rating-chip { display: inline-block; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 12px; margin: auto; }
+.rating-low  { background: #e8f5e9; color: #2e7d32; border: 2px solid #66bb6a; }
+.rating-med  { background: #fff8e1; color: #f57f17; border: 2px solid #ffa726; }
+.rating-high { background: #ffebee; color: #c62828; border: 2px solid #ef5350; }
+.at-risk-chip { display: inline-block; background: #1a1a2e; color: white; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 11px; }
+.acceptable-chip { display: inline-block; padding: 2px 8px; border-radius: 10px; font-weight: 700; font-size: 11px; }
+.acceptable-yes { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.acceptable-no  { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+/* Young Person form styles */
+.yp-form { background: white; border-radius: 8px; border: 1px solid #e0e0e0; overflow: hidden; }
+.yp-section { border-bottom: 1px solid #e8e8e8; padding: 14px 18px; }
+.yp-section:last-child { border-bottom: none; }
+.yp-section-label { font-size: 10px; font-weight: 700; color: #7a0000; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; }
+.yp-section-content { font-size: 12px; color: #1a1a2e; line-height: 1.6; }
+.yp-section-content ul { padding-left: 18px; }
+.yp-section-content li { margin-bottom: 4px; }
+.yp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.yp-field { border-bottom: 1px dashed #ccc; min-height: 24px; padding-bottom: 4px; margin-top: 4px; font-size: 11px; color: #555; }
+.page-footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 10px; font-size: 10px; margin-top: 8px; }
+/* Lightbox */
+#lb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; backdrop-filter: blur(4px); animation: lb-fade 0.18s ease; }
+#lb-overlay.open { display: flex; }
+@keyframes lb-fade { from{opacity:0}to{opacity:1} }
+#lb-img { max-width: 90vw; max-height: 88vh; border-radius: 8px; box-shadow: 0 8px 60px rgba(0,0,0,0.8); animation: lb-pop 0.2s cubic-bezier(0.34,1.56,0.64,1); object-fit: contain; }
+@keyframes lb-pop { from{transform:scale(0.82);opacity:0}to{transform:scale(1);opacity:1} }
+#lb-close { position: fixed; top: 18px; right: 22px; color: white; font-size: 32px; cursor: pointer; line-height: 1; opacity: 0.7; transition: opacity 0.15s; background: none; border: none; padding: 4px 8px; }
+#lb-close:hover { opacity: 1; }
+#lb-caption { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 11px; letter-spacing: 0.5px; white-space: nowrap; }
+#lb-nav-prev, #lb-nav-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 22px; cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.15s; user-select: none; }
+#lb-nav-prev { left: 16px; }
+#lb-nav-next { right: 16px; }
+#lb-nav-prev:hover, #lb-nav-next:hover { background: rgba(255,255,255,0.25); }
+@media print { body{background:white} .page-header,table.ra-table th{-webkit-print-color-adjust:exact;print-color-adjust:exact} #lb-overlay{display:none!important} }
+</style>
+</head>
+<body>
+<div id="lb-overlay">
+  <button id="lb-close">&#x2715;</button>
+  
+  <img id="lb-img" src="" alt="Enlarged photo">
+  <div id="lb-caption"></div>
+</div>
+<div class="page-header">
+  <div><div class="logo-text">NARROW AISLE LTD</div><div style="font-size:11px;opacity:0.8;letter-spacing:2px;">RISK ASSESSMENT</div></div>
+  <div class="doc-num">2026-033</div>
+</div>
+<div class="title-bar">
+  <div style="flex:1;">
+    <div style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Task / Activity</div>
+    <div style="font-size:16px;">Mental Health</div>
+  </div>
+  
+</div>
+<div class="meta-bar">
+  <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">Narrow Aisle Ltd</span></div>
+  <div class="meta-item"><span class="meta-label">Date Conducted</span><span class="meta-value">16 03 2023</span></div>
+  <div class="meta-item"><span class="meta-label">Date Reviewed</span><span class="meta-value">05 01 2024 MM(DSS)</span></div>
+  <div class="meta-item"><span class="meta-label">Assessors</span><span class="meta-value">MM (DSS)</span></div>
+</div>
+<div class="container">
+  <div class="risk-key">
+    <h4>Risk Key:</h4>
+    <span class="risk-badge risk-low">&#9679; Low (1–6)</span>
+    <span class="risk-badge risk-med">&#9679; Medium (7–12)</span>
+    <span class="risk-badge risk-high">&#9679; High (13–25)</span>
+    <span style="margin-left:auto;font-size:10px;color:#999;">At Risk: A = All, E = Employees, C = Contractors, V = Visitors</span>
+  </div>
+  <div class="ra-table-wrap"><table class="ra-table"><thead><tr>
+  <th class="left" style="width:14%">Hazard</th>
+  <th class="left" style="width:10%">Effect</th>
+  <th style="width:4%">At Risk</th>
+  <th style="width:4%" title="Initial Severity">Sev.</th>
+  <th style="width:4%" title="Initial Probability">Prob.</th>
+  <th style="width:4%" title="Initial Risk Rating">Rating</th>
+  <th class="left" style="width:22%">Existing Control Measures</th>
+  <th style="width:4%" title="Residual Severity">Sev.</th>
+  <th style="width:4%" title="Residual Probability">Prob.</th>
+  <th style="width:4%" title="Residual Risk Rating">Rating</th>
+  <th style="width:5%">Accept?</th>
+  <th class="left" style="width:17%">Additional Control Measures</th>
+  <th style="width:4%">Done</th>
+</tr></thead><tbody>
+<tr>
+  <td class="hazard-cell">Excessive demands made of workers</td>
+  <td class="effect-cell" style="font-size:10px;">Stress and/or mental health issues</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Employees are provided with adequate and achievable demands in
+relation to the agreed hours of work</p>
+<ul>
+<li><p>Personal work plans ensure workers know what their job
+involves</p></li>
+<li><p>Weekly team meetings discuss anticipated workload and forthcoming
+week (and to deal with planned absence)</p></li>
+<li><p>Regular meetings with workers (one to one) to discuss workload
+and any anticipated challenges</p></li>
+<li><p>Workload is adjusted to cope with peaks and absence cover in
+advance and with involvement of workers</p></li>
+<li><p>Workers are provided with sufficient resources (time and
+equipment) to complete their work</p></li>
+<li><p>Additional support provided to those with less experience or
+under pressure</p></li>
+<li><p>Training is provided to workers to allow them to time
+manage</p></li>
+<li><p>Information provided to workers to allow them to seek help if
+they have conflicting priorities</p></li>
+<li><p>Working hours and shift patterns have been agreed with
+workers</p></li>
+<li><p>Some amount of flexibility in start and finish times is
+available, to allow workers to manage outside work arrangements
+(commuting / childcare)</p></li>
+<li><p>System in place to notify workers if short deadline work is taken
+on, requiring longer hours for a short period</p></li>
+<li><p>Regular breaks are provided to workers</p></li>
+<li><p>Realistic deadlines are placed on workers</p></li>
+</ul></li>
+<li><p>The skills and abilities of workers are matched to the job
+demands</p>
+<ul>
+<li><p>Skills / Training matrix is maintained to ensure workers are
+allocated tasks they are competent for</p></li>
+<li><p>Workers assist in developing Development plans to identify
+training requirements</p></li>
+<li><p>Training forms a part of the performance monitoring arrangements
+we have in place to ensure it is effective and sufficient</p></li>
+<li><p>Team leaders empowered not to take on work for their team if
+capacity is reached</p></li>
+<li><p>Workers are not contacted ‘out of hours’</p></li>
+</ul></li>
+<li><p>Jobs are designed to be within the capabilities of workers</p>
+<ul>
+<li><p>Jobs provide stimulation and opportunities for workers to use
+their skills to maintain motivation</p></li>
+</ul></li>
+<li><p>Concerns raised by workers about their work environment are
+addressed</p>
+<ul>
+<li><p>Risk assessments for the environment are kept up to date and
+controls maintained to reduce distraction (noise, dust, vibration,
+etc.)</p></li>
+<li><p>Controls in place to manage the risk of verbal abuse and physical
+violence to workers</p></li>
+<li><p>Training provided to staff to de-escalate difficult
+situations</p></li>
+</ul></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain and monitor existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Lack of control over work</td>
+  <td class="effect-cell" style="font-size:10px;">Stress and/or mental health issues</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Workers have some control over the pace of their work</p>
+<ul>
+<li><p>Weekly team meetings discuss anticipated workload and forthcoming
+week (and to deal with planned absence)</p></li>
+<li><p>Regular meetings with workers (one to one) to discuss
+workload</p></li>
+<li><p>Discussion forums at the start of a project to identify working
+methods and output</p></li>
+<li><p>Teams created for specific projects and responsibility allocated
+to Team, rather than individuals</p></li>
+</ul></li>
+<li><p>Workers are encouraged to use their skills and initiative to do
+their work</p>
+<ul>
+<li><p>Regular meetings with workers (one to one) to discuss skills and
+development</p></li>
+</ul></li>
+<li><p>Where possible, workers are encouraged to develop new skills to
+help them undertake new and challenging pieces of work</p></li>
+<li><p>Workers are supported to develop their skills</p></li>
+<li><p>Workers are consulted on when breaks are taken</p></li>
+<li><p>Workers are consulted on their work patterns</p></li>
+<li><p>Decision making process is discussed and workers
+involved</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain and monitor existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Lack of support</td>
+  <td class="effect-cell" style="font-size:10px;">Stress and/or mental health issues</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Policy and procedure in place to support workers</p></li>
+<li><p>Managers are enabled and encouraged to support staff</p>
+<ul>
+<li><p>Weekly team meetings discuss anticipated workload and forthcoming
+week, as well as work-related stress</p></li>
+<li><p>Regular meetings with workers (one to one) to discuss
+work-related stress</p></li>
+<li><p>Workers consulted on how they would like to access management
+support</p></li>
+</ul></li>
+<li><p>Workers are enabled and encouraged to support colleagues</p>
+<ul>
+<li><p>Examples of good practice are shared across the team</p></li>
+</ul></li>
+<li><p>Support is available and details on how and when to access it is
+understood by staff</p>
+<ul>
+<li><p>Posters displayed with contact details for support
+organisations</p></li>
+</ul></li>
+<li><p>Some amount of flexibility in start and finish times is
+available, to allow workers to manage outside work arrangements
+(commuting / childcare)</p></li>
+<li><p>Workers know how to access resources required to do their
+job</p></li>
+<li><p>Workers have regular and constructive feedback</p></li>
+<li><p>Training forms a part of the performance monitoring arrangements
+we have in place to ensure it is effective and sufficient</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain and monitor existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Lack of positive working relationships</td>
+  <td class="effect-cell" style="font-size:10px;">Stress and/or mental health issues</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>We actively promote positive behaviours at work, to avoid
+conflict and ensure fairness</p></li>
+<li><p>Workers share information relative to their work</p></li>
+<li><p>Policy and procedures for dealing with unacceptable behaviour,
+including zero tolerance for discrimination of any kind, communicated to
+all workers</p></li>
+<li><p>Managers are provided with mechanisms to deal with unacceptable
+behaviour</p></li>
+<li><p>Workers have a confidential mechanism to report unacceptable
+behaviour</p></li>
+<li><p>Good communication is encouraged, through training and skill
+development (listening skills and confidence building)</p></li>
+<li><p>Teams are selected with a good balance of expertise and
+experience when preparing for new projects</p></li>
+<li><p>Success is celebrated at all levels of the organisation</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain and monitor existing controls.</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Poor understanding of role and/or
+responsibilities</td>
+  <td class="effect-cell" style="font-size:10px;">Stress and/or mental health issues</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Our structure ensures that the different requirements we place on
+workers are compatible</p>
+<ul>
+<li><p>Weekly team meetings discuss roles and any conflicts between
+roles</p></li>
+<li><p>Regular meetings with workers (one to one) to review specific
+standards of performance and individual tasks</p></li>
+<li><p>Personal work plans ensure workers know what their job
+involves</p></li>
+<li><p>Induction process includes explanation of worker role and
+responsibilities and ensure team members are aware of them</p></li>
+<li><p>Changes to roles and responsibilities (e.g. through promotion /
+re-organisation) are clarified to all team members</p></li>
+</ul></li>
+<li><p>Information is provided to workers to enable them to understand
+their role and responsibilities</p></li>
+<li><p>Workers are provided with clear information about the
+requirements of their role</p></li>
+<li><p>Workers have a mechanism to report any concerns or uncertainties
+they have about their role or responsibilities</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain and monitor existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Poor management and/or communication of change</td>
+  <td class="effect-cell" style="font-size:10px;">Stress and/or mental health issues</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Information about proposed changes are communicated to workers
+(via meetings, email, noticeboards, leaflets, etc.) in a timely
+manner</p>
+<ul>
+<li><p>Developments are communicated as early and as quickly as
+possible</p></li>
+</ul></li>
+<li><p>Workers are consulted on proposed changes early on, with an
+opportunity to influence proposals</p>
+<ul>
+<li><p>Mechanism provided for staff to ask questions before, during and
+after change</p></li>
+</ul></li>
+<li><p>Workers are provided with information about changes to their jobs
+and supported with training, where necessary</p></li>
+<li><p>On each occasion, we set out a timetable for change and
+communicate it (via email, noticeboards, leaflets, etc.) to
+workers</p></li>
+<li><p>Workers have access to support throughout the change
+process</p></li>
+<li><p>Personal work plans are reviewed as part of the change process
+and formally after change is implemented</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain and monitor existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+</tbody></table></div>
+</div>
+<div class="page-footer">Narrow Aisle Ltd &middot; Risk Assessment 2026-033 &middot; Mental Health &middot; This document is controlled. Review date applies.</div>
+<script>
+(function(){
+  var imgs=Array.from(document.querySelectorAll('.task-photos img'));
+  var overlay=document.getElementById('lb-overlay');
+  var lbImg=document.getElementById('lb-img');
+  var lbCap=document.getElementById('lb-caption');
+  var current=0;
+  function show(idx){current=(idx+imgs.length)%imgs.length;lbImg.src=imgs[current].src;lbCap.textContent=(current+1)+' / '+imgs.length;overlay.classList.add('open');}
+  function hide(){overlay.classList.remove('open');}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(e){e.stopPropagation();show(i);});});
+  overlay.addEventListener('click',hide);
+  document.getElementById('lb-close').addEventListener('click',hide);
+  document.getElementById('lb-img').addEventListener('click',function(e){e.stopPropagation();});
+  var p=document.getElementById('lb-nav-prev'),n=document.getElementById('lb-nav-next');
+  if(p)p.addEventListener('click',function(e){e.stopPropagation();show(current-1);});
+  if(n)n.addEventListener('click',function(e){e.stopPropagation();show(current+1);});
+  document.addEventListener('keydown',function(e){if(!overlay.classList.contains('open'))return;if(e.key==='Escape')hide();if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1);});
+})();
+</script>
+</body>
+</html>

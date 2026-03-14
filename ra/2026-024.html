@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-024 – Service Engineer | Narrow Aisle Ltd Risk Assessment</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 12px; }
+.page-header { background: linear-gradient(135deg, #7a0000 0%, #b30000 50%, #cc0000 100%); color: white; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.page-header .logo-text { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+.page-header .doc-num { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.title-bar { background: #1a1a2e; color: #fff; padding: 12px 24px; font-size: 15px; font-weight: 600; letter-spacing: 0.5px; display: flex; align-items: center; gap: 16px; }
+.title-bar .task-photos { display: flex; gap: 8px; align-items: center; }
+.title-bar .task-photos img { height: 70px; width: auto; border-radius: 6px; border: 2px solid rgba(255,255,255,0.2); object-fit: cover; cursor: zoom-in; transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
+.title-bar .task-photos img:hover { transform: scale(1.06); border-color: rgba(255,255,255,0.6); box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
+.meta-bar { background: #fff; border-bottom: 2px solid #b30000; padding: 10px 24px; display: flex; gap: 32px; font-size: 11px; flex-wrap: wrap; }
+.meta-bar .meta-item { display: flex; flex-direction: column; gap: 2px; }
+.meta-bar .meta-label { color: #7a0000; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; }
+.meta-bar .meta-value { color: #1a1a2e; font-weight: 500; }
+.container { padding: 16px 24px 28px; }
+.risk-key { background: white; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; border: 1px solid #e0e0e0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.risk-key h4 { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; }
+.risk-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.risk-low  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.risk-med  { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.risk-high { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+.ra-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e0e0e0; background: white; }
+table.ra-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+table.ra-table th { background: #7a0000; color: white; padding: 8px 6px; text-align: center; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; border: 1px solid #5c0000; }
+table.ra-table th.left { text-align: left; padding-left: 10px; }
+table.ra-table td { padding: 8px 6px; border: 1px solid #e8e8e8; vertical-align: top; }
+table.ra-table tr:nth-child(even) td { background: #fafafa; }
+table.ra-table tr:hover td { background: #fff3f3; }
+.hazard-cell { font-weight: 600; color: #1a1a2e; min-width: 130px; }
+.effect-cell { color: #555; min-width: 100px; }
+.controls-cell { min-width: 200px; }
+.controls-cell ul { padding-left: 14px; }
+.controls-cell li { margin-bottom: 3px; line-height: 1.4; }
+.num-cell { text-align: center; font-weight: 700; font-size: 13px; min-width: 36px; }
+.score-pre { color: #888; }
+.score-after { color: #2e7d32; }
+.rating-chip { display: inline-block; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 12px; margin: auto; }
+.rating-low  { background: #e8f5e9; color: #2e7d32; border: 2px solid #66bb6a; }
+.rating-med  { background: #fff8e1; color: #f57f17; border: 2px solid #ffa726; }
+.rating-high { background: #ffebee; color: #c62828; border: 2px solid #ef5350; }
+.at-risk-chip { display: inline-block; background: #1a1a2e; color: white; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 11px; }
+.acceptable-chip { display: inline-block; padding: 2px 8px; border-radius: 10px; font-weight: 700; font-size: 11px; }
+.acceptable-yes { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.acceptable-no  { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+/* Young Person form styles */
+.yp-form { background: white; border-radius: 8px; border: 1px solid #e0e0e0; overflow: hidden; }
+.yp-section { border-bottom: 1px solid #e8e8e8; padding: 14px 18px; }
+.yp-section:last-child { border-bottom: none; }
+.yp-section-label { font-size: 10px; font-weight: 700; color: #7a0000; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; }
+.yp-section-content { font-size: 12px; color: #1a1a2e; line-height: 1.6; }
+.yp-section-content ul { padding-left: 18px; }
+.yp-section-content li { margin-bottom: 4px; }
+.yp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.yp-field { border-bottom: 1px dashed #ccc; min-height: 24px; padding-bottom: 4px; margin-top: 4px; font-size: 11px; color: #555; }
+.page-footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 10px; font-size: 10px; margin-top: 8px; }
+/* Lightbox */
+#lb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; backdrop-filter: blur(4px); animation: lb-fade 0.18s ease; }
+#lb-overlay.open { display: flex; }
+@keyframes lb-fade { from{opacity:0}to{opacity:1} }
+#lb-img { max-width: 90vw; max-height: 88vh; border-radius: 8px; box-shadow: 0 8px 60px rgba(0,0,0,0.8); animation: lb-pop 0.2s cubic-bezier(0.34,1.56,0.64,1); object-fit: contain; }
+@keyframes lb-pop { from{transform:scale(0.82);opacity:0}to{transform:scale(1);opacity:1} }
+#lb-close { position: fixed; top: 18px; right: 22px; color: white; font-size: 32px; cursor: pointer; line-height: 1; opacity: 0.7; transition: opacity 0.15s; background: none; border: none; padding: 4px 8px; }
+#lb-close:hover { opacity: 1; }
+#lb-caption { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 11px; letter-spacing: 0.5px; white-space: nowrap; }
+#lb-nav-prev, #lb-nav-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 22px; cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.15s; user-select: none; }
+#lb-nav-prev { left: 16px; }
+#lb-nav-next { right: 16px; }
+#lb-nav-prev:hover, #lb-nav-next:hover { background: rgba(255,255,255,0.25); }
+@media print { body{background:white} .page-header,table.ra-table th{-webkit-print-color-adjust:exact;print-color-adjust:exact} #lb-overlay{display:none!important} }
+</style>
+</head>
+<body>
+<div id="lb-overlay">
+  <button id="lb-close">&#x2715;</button>
+  
+  <img id="lb-img" src="" alt="Enlarged photo">
+  <div id="lb-caption"></div>
+</div>
+<div class="page-header">
+  <div><div class="logo-text">NARROW AISLE LTD</div><div style="font-size:11px;opacity:0.8;letter-spacing:2px;">RISK ASSESSMENT</div></div>
+  <div class="doc-num">2026-024</div>
+</div>
+<div class="title-bar">
+  <div style="flex:1;">
+    <div style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Task / Activity</div>
+    <div style="font-size:16px;">Service Engineer</div>
+  </div>
+  
+</div>
+<div class="meta-bar">
+  <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">Narrow Aisle Ltd</span></div>
+  <div class="meta-item"><span class="meta-label">Date Conducted</span><span class="meta-value">13-01-2020</span></div>
+  <div class="meta-item"><span class="meta-label">Date Reviewed</span><span class="meta-value">13-10-2020 (MM DSS) 04-02-2021 MM(DSS)</span></div>
+  <div class="meta-item"><span class="meta-label">Assessors</span><span class="meta-value">MM (DSS)</span></div>
+</div>
+<div class="container">
+  <div class="risk-key">
+    <h4>Risk Key:</h4>
+    <span class="risk-badge risk-low">&#9679; Low (1–6)</span>
+    <span class="risk-badge risk-med">&#9679; Medium (7–12)</span>
+    <span class="risk-badge risk-high">&#9679; High (13–25)</span>
+    <span style="margin-left:auto;font-size:10px;color:#999;">At Risk: A = All, E = Employees, C = Contractors, V = Visitors</span>
+  </div>
+  <div class="ra-table-wrap"><table class="ra-table"><thead><tr>
+  <th class="left" style="width:14%">Hazard</th>
+  <th class="left" style="width:10%">Effect</th>
+  <th style="width:4%">At Risk</th>
+  <th style="width:4%" title="Initial Severity">Sev.</th>
+  <th style="width:4%" title="Initial Probability">Prob.</th>
+  <th style="width:4%" title="Initial Risk Rating">Rating</th>
+  <th class="left" style="width:22%">Existing Control Measures</th>
+  <th style="width:4%" title="Residual Severity">Sev.</th>
+  <th style="width:4%" title="Residual Probability">Prob.</th>
+  <th style="width:4%" title="Residual Risk Rating">Rating</th>
+  <th style="width:5%">Accept?</th>
+  <th class="left" style="width:17%">Additional Control Measures</th>
+  <th style="width:4%">Done</th>
+</tr></thead><tbody>
+<tr>
+  <td class="hazard-cell">Unfamiliarity with premises</td>
+  <td class="effect-cell" style="font-size:10px;">Entering no go-zones, not knowing emergency procedures</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">5</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">10</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers sign in at premises and speak with responsible manager
+prior to progressing to working areas.</p></li>
+<li><p>Service vans are parked safely in Visitors area where
+available.</p></li>
+<li><p>Engineers familiarise themselves with fire and emergency
+procedures on arrival.</p></li>
+<li><p>Engineers receive induction when requested.</p></li>
+<li><p>Engineers follow site rules at all times.</p></li>
+<li><p>Engineers wear high visibility jacket or waistcoat at all
+times</p></li>
+</ul></td>
+  <td class="num-cell score-after">5</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">5</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Carryout regular audits of Service engineers.</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Contact with vehicles / other FLT’s / overhead obstructions
+etc.</td>
+  <td class="effect-cell" style="font-size:10px;">Crushing, death</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">5</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-high">15</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers ensure that a suitable flat, clean area is provided by
+the customer where the truck can be serviced safely.</p></li>
+<li><p>Engineers ensure that the area is away from plant and traffic
+movements and any other hazards (Racking, machinery, overhead hazards,
+noise etc.)</p></li>
+<li><p>A sign is placed on steering wheel or seat highlighting the fact
+the truck is being worked on.</p></li>
+</ul></td>
+  <td class="num-cell score-after">5</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">5</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Carryout regular audits of Service engineers.</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Use of hand tools</td>
+  <td class="effect-cell" style="font-size:10px;">Cuts, bruises etc</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-low">6</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Workers provided with their own basic hand tools at
+induction</p></li>
+<li><p>Hand tools are visually inspected prior to use and any defective
+equipment is withdrawn from service.</p></li>
+<li><p>Engineers are provided with suitable PPE including gloves, eye
+protection and protective footwear.</p></li>
+<li><p>Hand tools are not left unattended at any time.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">2</td>
+  <td class="num-cell"><span class="rating-chip rating-low">6</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">M</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Manager to carryout regular checks of engineer’s basic hand
+tools.</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Trapping in moving parts etc.</td>
+  <td class="effect-cell" style="font-size:10px;">Cuts, bruising etc.</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">5</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-high">15</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Mast is lowered, hand brake applied and the truck isolated and
+key removed prior to undertaking work on truck.</p></li>
+<li><p>Where necessary, wheels are chocked as additional measure to
+prevent truck moving.</p></li>
+<li><p>Work is only carried out on flat, stable ground wherever
+possible.</p></li>
+<li><p>If mast cannot be lowered, it must be suitably propped and
+supported with a suitably rated and fitted prop to prevent mast failing
+and crushing engineer.</p></li>
+<li><p>Mast must only be raised for a minimum amount of time.</p></li>
+<li><p>Safety helmet to be worn.</p></li>
+<li><p>FLT is only jacked up the minimum amount to remove
+wheels.</p></li>
+<li><p>Engineers instructed to never climb or crawl underneath a
+FLT.</p></li>
+</ul>
+<ul>
+<li><p>See section on use of jacks.</p></li>
+</ul></td>
+  <td class="num-cell score-after">5</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">5</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Poor lighting</td>
+  <td class="effect-cell" style="font-size:10px;">Accidents due to poor visibility</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers are equipped with suitable work light.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">3</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Noise</td>
+  <td class="effect-cell" style="font-size:10px;">Hearing Loss, Tinnitus etc.</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-low">6</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Wherever possible the truck service/repair area is away from
+hearing protection zones and noisy areas.</p></li>
+<li><p>Ear defenders are formally issued, and engineers instructed to
+use them when working in areas above 85dba.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">3</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Hand Arm Vibration</td>
+  <td class="effect-cell" style="font-size:10px;">Hand arm vibration syndrome</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">8</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Tools and equipment are well maintained, and any defects reported
+immediately.</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">8</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">M</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Ensure that vibration damped equipment is specified wherever
+possible.</p></li>
+<li><p>Ensure that vibration data is obtained for all equipment and put
+through the HSE vibration exposure calculator.</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Use of power tools</td>
+  <td class="effect-cell" style="font-size:10px;">Entanglement, flying objects etc.</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers are competent in the use of power tools.</p></li>
+<li><p>Power tools are inspected, and PAT tested regularly.</p></li>
+<li><p>All guards and safety devices are fitted to power tools and in
+working order.</p></li>
+<li><p>Discs are correct size and type.</p></li>
+<li><p>Drill bits are sharp and of correct size.</p></li>
+<li><p>Extension leads only used when absolutely necessary, fully
+unwound and routed away from walkways.</p></li>
+</ul>
+<ul>
+<li><p>Engineers wear suitable work clothing and PPE to include eye
+protection, ear protection and safety footwear.</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Extremes in temperature</td>
+  <td class="effect-cell" style="font-size:10px;">Discomfort, distraction</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">9</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers wear layered clothing to ensure they stay cool in
+Summer and warm during cooler months.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">3</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Manual Handling</td>
+  <td class="effect-cell" style="font-size:10px;">Back injuries, broken bones, cuts etc.</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>All engineers are trained in manual handling techniques.</p></li>
+<li><p>Suitable lifting equipment is provided for motors, batteries
+etc.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">9</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">M</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Injuries to 3 rd  parties</td>
+  <td class="effect-cell" style="font-size:10px;">Death, broken bones etc.</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">9</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers instructed to ensure that no tools or equipment are
+left unattended.</p></li>
+</ul>
+<ul>
+<li><p>Work area is clear prior to commencing work.</p></li>
+</ul>
+<ul>
+<li><p>Engineers liaise with the responsible site manager to ensure that
+the work can be carried out without interference from staff /
+contractors etc.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">3</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Slips and Trips</td>
+  <td class="effect-cell" style="font-size:10px;">Broken bones, cuts, bruises</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-low">6</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers wear a suitable safety boot or shoe with steel toe cap
+and non-slip sole.</p></li>
+<li><p>Work area is clean and free from oils and greases etc.</p></li>
+<li><p>Overspray from chain lube etc. is cleared to prevent slip
+hazard.</p></li>
+<li><p>Engineers instructed to keep to designated walkways if
+available.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">3</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Hazardous Substances</td>
+  <td class="effect-cell" style="font-size:10px;">Skin, respiratory, eye contact and associated problems.</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">9</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Only the minimum amounts of products are carried.</p></li>
+<li><p>All hazardous substances are individually assessed.</p></li>
+<li><p>No substance can be brought into service without prior assessment
+by the company.</p></li>
+<li><p>Work is not undertaken close to sources of ignition.</p></li>
+<li><p>All substances are clearly marked in original
+containers.</p></li>
+<li><p>Engineers are equipped with suitable impervious gloves, safety
+goggles and FFP3 respirators.</p></li>
+<li><p>Fire extinguishers are available close to hand, along with a
+first aid kit and suitable eye washes.</p></li>
+<li><p>COSHH risk assessments and MSDS’s reviewed regularly.</p></li>
+<li><p>Engineers issued with COSHH assessments for the use of
+substances.</p></li>
+<li><p>Annual skin assessments are undertaken by management.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">3</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Driving Flexi Truck</td>
+  <td class="effect-cell" style="font-size:10px;">Collision with pedestrians, other vehicles and structure</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">5</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">10</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Engineers are trained and competent to operate fork lift
+trucks.</p></li>
+<li><p>Ensure site traffic management rules are adhered to.</p></li>
+<li><p>Ensure speed limits and traffic routes are adhered to.</p></li>
+<li><p>Lights, flashing beacon and horn are used as
+appropriate.</p></li>
+</ul></td>
+  <td class="num-cell score-after">5</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">5</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Use of Jacks</td>
+  <td class="effect-cell" style="font-size:10px;">Crushing, failure of equipment etc.</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">5</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-high">15</span></td>
+  <td class="controls-cell"><ul>
+<li><p><strong>Jacks are subject to Thorough Examination every 12
+months.</strong></p></li>
+<li><p>Jacks are visually inspected prior to use and any defects
+reported immediately.</p></li>
+<li><p>Engineers trained to ensure that trucks are only lifted the
+absolute minimum to inspect the brakes.</p></li>
+<li><p>Only the recognised jacking point is used.</p></li>
+<li><p>Ensure that a secondary support is used (rated blocks).</p></li>
+<li><p>Engineers instructed to never crawl or place any part of the body
+under the truck.</p></li>
+<li><p>Jacks only used on solid, flat and stable ground.</p></li>
+</ul></td>
+  <td class="num-cell score-after">5</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">5</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Work at Height</td>
+  <td class="effect-cell" style="font-size:10px;">Falls from height, broken bones etc.</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">5</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-high">15</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Work is undertaken from the ground wherever possible.</p></li>
+<li><p>Engineers are instructed NEVER to stand on the overhead guard or
+raised forks or any other structure such as racking, pallets
+etc.</p></li>
+</ul></td>
+  <td class="num-cell score-after">5</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">5</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Lack of First Aid provision</td>
+  <td class="effect-cell" style="font-size:10px;">Delay treating injuries, complication / infection</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>First Aid kit carried on service vehicles</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Monitor and maintain provision</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+</tbody></table></div>
+</div>
+<div class="page-footer">Narrow Aisle Ltd &middot; Risk Assessment 2026-024 &middot; Service Engineer &middot; This document is controlled. Review date applies.</div>
+<script>
+(function(){
+  var imgs=Array.from(document.querySelectorAll('.task-photos img'));
+  var overlay=document.getElementById('lb-overlay');
+  var lbImg=document.getElementById('lb-img');
+  var lbCap=document.getElementById('lb-caption');
+  var current=0;
+  function show(idx){current=(idx+imgs.length)%imgs.length;lbImg.src=imgs[current].src;lbCap.textContent=(current+1)+' / '+imgs.length;overlay.classList.add('open');}
+  function hide(){overlay.classList.remove('open');}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(e){e.stopPropagation();show(i);});});
+  overlay.addEventListener('click',hide);
+  document.getElementById('lb-close').addEventListener('click',hide);
+  document.getElementById('lb-img').addEventListener('click',function(e){e.stopPropagation();});
+  var p=document.getElementById('lb-nav-prev'),n=document.getElementById('lb-nav-next');
+  if(p)p.addEventListener('click',function(e){e.stopPropagation();show(current-1);});
+  if(n)n.addEventListener('click',function(e){e.stopPropagation();show(current+1);});
+  document.addEventListener('keydown',function(e){if(!overlay.classList.contains('open'))return;if(e.key==='Escape')hide();if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1);});
+})();
+</script>
+</body>
+</html>

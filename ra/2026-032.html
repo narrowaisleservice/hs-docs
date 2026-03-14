@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-032 – Welding at Client's Site | Narrow Aisle Ltd Risk Assessment</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 12px; }
+.page-header { background: linear-gradient(135deg, #7a0000 0%, #b30000 50%, #cc0000 100%); color: white; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.page-header .logo-text { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+.page-header .doc-num { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.title-bar { background: #1a1a2e; color: #fff; padding: 12px 24px; font-size: 15px; font-weight: 600; letter-spacing: 0.5px; display: flex; align-items: center; gap: 16px; }
+.title-bar .task-photos { display: flex; gap: 8px; align-items: center; }
+.title-bar .task-photos img { height: 70px; width: auto; border-radius: 6px; border: 2px solid rgba(255,255,255,0.2); object-fit: cover; cursor: zoom-in; transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
+.title-bar .task-photos img:hover { transform: scale(1.06); border-color: rgba(255,255,255,0.6); box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
+.meta-bar { background: #fff; border-bottom: 2px solid #b30000; padding: 10px 24px; display: flex; gap: 32px; font-size: 11px; flex-wrap: wrap; }
+.meta-bar .meta-item { display: flex; flex-direction: column; gap: 2px; }
+.meta-bar .meta-label { color: #7a0000; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; }
+.meta-bar .meta-value { color: #1a1a2e; font-weight: 500; }
+.container { padding: 16px 24px 28px; }
+.risk-key { background: white; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; border: 1px solid #e0e0e0; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.risk-key h4 { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; }
+.risk-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.risk-low  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.risk-med  { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.risk-high { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+.ra-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e0e0e0; background: white; }
+table.ra-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+table.ra-table th { background: #7a0000; color: white; padding: 8px 6px; text-align: center; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; border: 1px solid #5c0000; }
+table.ra-table th.left { text-align: left; padding-left: 10px; }
+table.ra-table td { padding: 8px 6px; border: 1px solid #e8e8e8; vertical-align: top; }
+table.ra-table tr:nth-child(even) td { background: #fafafa; }
+table.ra-table tr:hover td { background: #fff3f3; }
+.hazard-cell { font-weight: 600; color: #1a1a2e; min-width: 130px; }
+.effect-cell { color: #555; min-width: 100px; }
+.controls-cell { min-width: 200px; }
+.controls-cell ul { padding-left: 14px; }
+.controls-cell li { margin-bottom: 3px; line-height: 1.4; }
+.num-cell { text-align: center; font-weight: 700; font-size: 13px; min-width: 36px; }
+.score-pre { color: #888; }
+.score-after { color: #2e7d32; }
+.rating-chip { display: inline-block; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 12px; margin: auto; }
+.rating-low  { background: #e8f5e9; color: #2e7d32; border: 2px solid #66bb6a; }
+.rating-med  { background: #fff8e1; color: #f57f17; border: 2px solid #ffa726; }
+.rating-high { background: #ffebee; color: #c62828; border: 2px solid #ef5350; }
+.at-risk-chip { display: inline-block; background: #1a1a2e; color: white; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 11px; }
+.acceptable-chip { display: inline-block; padding: 2px 8px; border-radius: 10px; font-weight: 700; font-size: 11px; }
+.acceptable-yes { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.acceptable-no  { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+/* Young Person form styles */
+.yp-form { background: white; border-radius: 8px; border: 1px solid #e0e0e0; overflow: hidden; }
+.yp-section { border-bottom: 1px solid #e8e8e8; padding: 14px 18px; }
+.yp-section:last-child { border-bottom: none; }
+.yp-section-label { font-size: 10px; font-weight: 700; color: #7a0000; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; }
+.yp-section-content { font-size: 12px; color: #1a1a2e; line-height: 1.6; }
+.yp-section-content ul { padding-left: 18px; }
+.yp-section-content li { margin-bottom: 4px; }
+.yp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.yp-field { border-bottom: 1px dashed #ccc; min-height: 24px; padding-bottom: 4px; margin-top: 4px; font-size: 11px; color: #555; }
+.page-footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 10px; font-size: 10px; margin-top: 8px; }
+/* Lightbox */
+#lb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; backdrop-filter: blur(4px); animation: lb-fade 0.18s ease; }
+#lb-overlay.open { display: flex; }
+@keyframes lb-fade { from{opacity:0}to{opacity:1} }
+#lb-img { max-width: 90vw; max-height: 88vh; border-radius: 8px; box-shadow: 0 8px 60px rgba(0,0,0,0.8); animation: lb-pop 0.2s cubic-bezier(0.34,1.56,0.64,1); object-fit: contain; }
+@keyframes lb-pop { from{transform:scale(0.82);opacity:0}to{transform:scale(1);opacity:1} }
+#lb-close { position: fixed; top: 18px; right: 22px; color: white; font-size: 32px; cursor: pointer; line-height: 1; opacity: 0.7; transition: opacity 0.15s; background: none; border: none; padding: 4px 8px; }
+#lb-close:hover { opacity: 1; }
+#lb-caption { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 11px; letter-spacing: 0.5px; white-space: nowrap; }
+#lb-nav-prev, #lb-nav-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 22px; cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.15s; user-select: none; }
+#lb-nav-prev { left: 16px; }
+#lb-nav-next { right: 16px; }
+#lb-nav-prev:hover, #lb-nav-next:hover { background: rgba(255,255,255,0.25); }
+@media print { body{background:white} .page-header,table.ra-table th{-webkit-print-color-adjust:exact;print-color-adjust:exact} #lb-overlay{display:none!important} }
+</style>
+</head>
+<body>
+<div id="lb-overlay">
+  <button id="lb-close">&#x2715;</button>
+  
+  <img id="lb-img" src="" alt="Enlarged photo">
+  <div id="lb-caption"></div>
+</div>
+<div class="page-header">
+  <div><div class="logo-text">NARROW AISLE LTD</div><div style="font-size:11px;opacity:0.8;letter-spacing:2px;">RISK ASSESSMENT</div></div>
+  <div class="doc-num">2026-032</div>
+</div>
+<div class="title-bar">
+  <div style="flex:1;">
+    <div style="font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Task / Activity</div>
+    <div style="font-size:16px;">Welding at Client's Site</div>
+  </div>
+  
+</div>
+<div class="meta-bar">
+  <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">Narrow Aisle Ltd</span></div>
+  <div class="meta-item"><span class="meta-label">Date Conducted</span><span class="meta-value">19 05 2023</span></div>
+  <div class="meta-item"><span class="meta-label">Date Reviewed</span><span class="meta-value"></span></div>
+  <div class="meta-item"><span class="meta-label">Assessors</span><span class="meta-value">M.Monaghan (DSS)</span></div>
+</div>
+<div class="container">
+  <div class="risk-key">
+    <h4>Risk Key:</h4>
+    <span class="risk-badge risk-low">&#9679; Low (1–6)</span>
+    <span class="risk-badge risk-med">&#9679; Medium (7–12)</span>
+    <span class="risk-badge risk-high">&#9679; High (13–25)</span>
+    <span style="margin-left:auto;font-size:10px;color:#999;">At Risk: A = All, E = Employees, C = Contractors, V = Visitors</span>
+  </div>
+  <div class="ra-table-wrap"><table class="ra-table"><thead><tr>
+  <th class="left" style="width:14%">Hazard</th>
+  <th class="left" style="width:10%">Effect</th>
+  <th style="width:4%">At Risk</th>
+  <th style="width:4%" title="Initial Severity">Sev.</th>
+  <th style="width:4%" title="Initial Probability">Prob.</th>
+  <th style="width:4%" title="Initial Risk Rating">Rating</th>
+  <th class="left" style="width:22%">Existing Control Measures</th>
+  <th style="width:4%" title="Residual Severity">Sev.</th>
+  <th style="width:4%" title="Residual Probability">Prob.</th>
+  <th style="width:4%" title="Residual Risk Rating">Rating</th>
+  <th style="width:5%">Accept?</th>
+  <th class="left" style="width:17%">Additional Control Measures</th>
+  <th style="width:4%">Done</th>
+</tr></thead><tbody>
+<tr>
+  <td class="hazard-cell">Fire and Explosion</td>
+  <td class="effect-cell" style="font-size:10px;">Damage to building and multiple injuries / fatal accidents</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">5</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">10</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Equipment is fit for purpose and well maintained.</p></li>
+<li><p>Area is physically protected with screens or solid barriers to
+protect passers-by.</p></li>
+<li><p>Battery disconnected from forklift before welding begins</p></li>
+<li><p>Forklift stripped of flammable parts, as far as
+possible.</p></li>
+<li><p>Good housekeeping standards maintained and flammable materials
+are removed from welding area.</p></li>
+<li><p>Welding equipment is fitted with flashback arrestors
+etc.</p></li>
+<li><p>Pipe work and connections are regularly visually checked</p></li>
+<li><p>Powder fire extinguisher is close to hand.</p></li>
+<li><p>Hot work never left unattended –items have been allowed to cool
+prior to leaving the site.</p></li>
+<li><p>Welders are trained and competent.</p></li>
+<li><p>Welding in an environment where flammable atmosphere exists from
+paint fumes or charging batteries for example is never
+undertaken.</p></li>
+<li><p>Process explained to site contact and best place to carry out
+work identified.</p></li>
+<li><p>Truck moved outside, wherever possible.</p></li>
+<li><p>We operate within the customer Permit to Work system, as
+required.</p></li>
+<li><p>Workers aware of nearest Fire Exit and the Assembly Point for the
+site.</p></li>
+</ul></td>
+  <td class="num-cell score-after">5</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">5</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Maintain existing controls</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Burns and scalds and exposure to UV</td>
+  <td class="effect-cell" style="font-size:10px;">Burns, scalds etc. form hot surfaces</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">8</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Welding undertaken by trained and competent persons
+only.</p></li>
+<li><p>Full PPE required for welding – suitably graded welding mask,
+leather gauntlets and apron / proban overalls.</p></li>
+<li><p>all skin is covered – proban overalls</p></li>
+<li><p>Area is physically protected with welding curtains or physical
+barrier</p></li>
+<li><p>Welders are trained and competent.</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Display Signage near to work area warning off the risk.</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Manual handling equipment and gas bottles</td>
+  <td class="effect-cell" style="font-size:10px;">Back injuries, sprains, strains etc</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Vehicle parked as close as possible to work area</p></li>
+<li><p>Truck moved to work area before removing power supply</p></li>
+<li><p>employees are trained in manual handling techniques.</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">4</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Arc eye / flash – operator and passers by</td>
+  <td class="effect-cell" style="font-size:10px;">Eye injuries and potential permanent damage</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">9</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Suitably graded welding mask always used</p></li>
+<li><p>Area is physically protected with welding curtains or solid
+barrier.</p></li>
+</ul></td>
+  <td class="num-cell score-after">3</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">3</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Display Signage near to work area warning off the risk.</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Exposure to welding fume</td>
+  <td class="effect-cell" style="font-size:10px;">Lung disease, irritation</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Welding undertaken outside and extraction unit used at all
+times</p></li>
+<li><p>Short duration exposure</p></li>
+<li><p>FFP3 mask to be used.</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">8</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">M</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Move forklift outside, wherever possible</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Moving vehicles and pedestrians</td>
+  <td class="effect-cell" style="font-size:10px;">Collision, major injury</td>
+  <td class="num-cell"><span class="at-risk-chip">A</span></td>
+  <td class="num-cell score-pre">4</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-med">12</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Hi-vis worn when walking through site</p></li>
+<li><p>Pre-arranged route and site contact allocated</p></li>
+<li><p>Site Rules briefing requested on arrival</p></li>
+<li><p>Ensure area is physically protected with welding
+curtains.</p></li>
+</ul></td>
+  <td class="num-cell score-after">4</td>
+  <td class="num-cell score-after">2</td>
+  <td class="num-cell"><span class="rating-chip rating-med">8</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">M</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Explain process to site contact and identify requirements to run
+job safely</p></li>
+<li><p>Operate within the customer Permit to Work system, as
+required</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+<tr>
+  <td class="hazard-cell">Slips, trips and falls</td>
+  <td class="effect-cell" style="font-size:10px;">Minor injury</td>
+  <td class="num-cell"><span class="at-risk-chip">E</span></td>
+  <td class="num-cell score-pre">2</td>
+  <td class="num-cell score-pre">3</td>
+  <td class="num-cell"><span class="rating-chip rating-low">6</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Safety footwear worn at all times</p></li>
+<li><p>Keep work area clear and unobstructed</p></li>
+<li><p>Remove all loose items from work area</p></li>
+<li><p>Ensure area is physically protected with welding
+curtains.</p></li>
+</ul></td>
+  <td class="num-cell score-after">2</td>
+  <td class="num-cell score-after">1</td>
+  <td class="num-cell"><span class="rating-chip rating-low">2</span></td>
+  <td class="num-cell"><span class="acceptable-chip acceptable-yes">&#10003; Acceptable</span></td>
+  <td class="controls-cell"><ul>
+<li><p>Report and spillages to site contact</p></li>
+</ul></td>
+  <td class="num-cell"></td>
+</tr>
+</tbody></table></div>
+</div>
+<div class="page-footer">Narrow Aisle Ltd &middot; Risk Assessment 2026-032 &middot; Welding at Client's Site &middot; This document is controlled. Review date applies.</div>
+<script>
+(function(){
+  var imgs=Array.from(document.querySelectorAll('.task-photos img'));
+  var overlay=document.getElementById('lb-overlay');
+  var lbImg=document.getElementById('lb-img');
+  var lbCap=document.getElementById('lb-caption');
+  var current=0;
+  function show(idx){current=(idx+imgs.length)%imgs.length;lbImg.src=imgs[current].src;lbCap.textContent=(current+1)+' / '+imgs.length;overlay.classList.add('open');}
+  function hide(){overlay.classList.remove('open');}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(e){e.stopPropagation();show(i);});});
+  overlay.addEventListener('click',hide);
+  document.getElementById('lb-close').addEventListener('click',hide);
+  document.getElementById('lb-img').addEventListener('click',function(e){e.stopPropagation();});
+  var p=document.getElementById('lb-nav-prev'),n=document.getElementById('lb-nav-next');
+  if(p)p.addEventListener('click',function(e){e.stopPropagation();show(current-1);});
+  if(n)n.addEventListener('click',function(e){e.stopPropagation();show(current+1);});
+  document.addEventListener('keydown',function(e){if(!overlay.classList.contains('open'))return;if(e.key==='Escape')hide();if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1);});
+})();
+</script>
+</body>
+</html>
